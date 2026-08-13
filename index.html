@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Kata Nama Khas & Am</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal-950:#0b3335;
+    --teal-900:#0f4a4d;
+    --teal-800:#146267;
+    --teal-700:#1a7b81;
+    --gold-500:#cf9a2e;
+    --gold-400:#e0b04a;
+    --gold-100:#f6e8c8;
+    --cream:#fbf4e6;
+    --cream-2:#f3e9d4;
+    --ink:#28211a;
+    --ink-soft:#5c5346;
+    --green:#3f7d52;
+    --green-bg:#e7f2e9;
+    --amber:#c07f1f;
+    --amber-bg:#fbf0dc;
+    --red:#b4453a;
+    --red-bg:#faeae7;
+    --shadow: 0 10px 30px -12px rgba(11,51,53,0.35);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(224,176,74,0.10), transparent 40%),
+      radial-gradient(circle at 90% 85%, rgba(20,98,103,0.12), transparent 45%),
+      var(--cream);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    padding:0 0 80px;
+    min-height:100vh;
+  }
+  .hero{
+    background: linear-gradient(160deg, var(--teal-950) 0%, var(--teal-900) 55%, var(--teal-800) 100%);
+    color:var(--cream);
+    padding:56px 24px 68px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(224,176,74,0.05) 0 2px, transparent 2px 26px),
+      repeating-linear-gradient(-45deg, rgba(224,176,74,0.05) 0 2px, transparent 2px 26px);
+    pointer-events:none;
+  }
+  .hero-inner{ max-width:820px; margin:0 auto; position:relative; }
+  .kite{ width:54px; height:54px; margin-bottom:18px; display:block; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    font-size:12.5px;
+    color:var(--gold-400);
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(30px, 4.4vw, 46px);
+    line-height:1.15;
+    margin:0 0 14px;
+  }
+  h1 em{ font-style:italic; font-weight:500; color:var(--gold-400); }
+  .hero p{ font-size:16px; line-height:1.65; max-width:580px; color:#e7f0ee; margin:0 0 26px; }
+  .hero-note{
+    display:inline-flex; align-items:center; gap:10px;
+    background:rgba(224,176,74,0.14);
+    border:1px solid rgba(224,176,74,0.35);
+    padding:10px 16px;
+    border-radius:100px;
+    font-size:13.5px;
+    color:var(--gold-100);
+  }
+
+  .wrap{ max-width:820px; margin:-32px auto 0; padding:0 24px; }
+
+  .legend{
+    display:flex; gap:14px; flex-wrap:wrap;
+    background:var(--cream); border:1px solid var(--cream-2);
+    border-radius:16px; padding:16px 20px; box-shadow:var(--shadow);
+    margin-bottom:24px; font-size:13.5px; color:var(--ink-soft);
+  }
+  .legend b{ color:var(--ink); }
+  .legend-item{ display:flex; align-items:center; gap:8px; }
+  .swatch{ width:14px; height:14px; border-radius:4px; }
+  .swatch.ka{ background:var(--teal-700); }
+  .swatch.kk{ background:var(--gold-500); }
+
+  .progress{
+    background:var(--cream);
+    border:1px solid var(--cream-2);
+    border-radius:16px;
+    padding:16px 20px;
+    box-shadow:var(--shadow);
+    display:flex; align-items:center; gap:16px;
+    margin-bottom:26px;
+  }
+  .progress-track{ flex:1; height:8px; border-radius:100px; background:var(--cream-2); overflow:hidden; }
+  .progress-fill{
+    height:100%; width:0%;
+    background:linear-gradient(90deg, var(--gold-500), var(--teal-700));
+    border-radius:100px;
+    transition:width .5s cubic-bezier(.4,0,.2,1);
+  }
+  .progress-label{ font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--ink-soft); white-space:nowrap; }
+
+  .card{
+    background:#fff;
+    border:1px solid var(--cream-2);
+    border-radius:20px;
+    padding:8px 8px 26px;
+    margin-bottom:22px;
+    box-shadow:var(--shadow);
+  }
+
+  .table-head{
+    display:grid;
+    grid-template-columns: 1fr auto;
+    gap:12px;
+    padding:18px 22px 12px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+
+  .row{
+    display:grid;
+    grid-template-columns: 1fr auto;
+    gap:12px;
+    align-items:center;
+    padding:14px 22px;
+    border-top:1px solid var(--cream-2);
+    transition: background .2s ease;
+  }
+  .row.correct{ background:var(--green-bg); }
+  .row.wrong{ background:var(--red-bg); }
+
+  .perkataan{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:18px;
+    color:var(--ink);
+  }
+  .perkataan .sub{
+    display:block;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:400;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+
+  .choice-group{ display:flex; gap:8px; }
+  .choice-btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size:13.5px;
+    padding:8px 16px;
+    border-radius:9px;
+    border:1.5px solid var(--cream-2);
+    background:#fff;
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition: all .15s ease;
+    min-width:56px;
+  }
+  .choice-btn:hover{ border-color:var(--teal-700); }
+  .choice-btn.selected-ka{ background:var(--teal-700); border-color:var(--teal-700); color:#fff; }
+  .choice-btn.selected-kk{ background:var(--gold-500); border-color:var(--gold-500); color:var(--teal-950); }
+
+  .mark{
+    font-size:15px;
+    margin-left:2px;
+  }
+
+  .actions{ display:flex; flex-wrap:wrap; gap:10px; padding:20px 22px 4px; }
+  .btn{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:14px;
+    padding:10px 20px;
+    border-radius:100px;
+    border:1.5px solid transparent;
+    cursor:pointer;
+    transition: all .15s ease;
+  }
+  .btn-primary{ background:var(--teal-900); color:#fff; }
+  .btn-primary:hover{ background:var(--teal-800); }
+  .btn-ghost{ background:transparent; color:var(--ink-soft); border-color:var(--cream-2); }
+  .btn-ghost:hover{ border-color:var(--teal-700); color:var(--teal-900); }
+  .btn-reveal{ background:transparent; color:var(--gold-500); border-color:var(--gold-400); }
+  .btn-reveal:hover{ background:var(--gold-100); }
+
+  .feedback{
+    margin:0 22px 4px;
+    border-radius:14px;
+    padding:16px 18px;
+    font-size:14.5px;
+    line-height:1.65;
+    display:none;
+  }
+  .feedback.show{ display:block; animation: rise .28s ease; }
+  @keyframes rise{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:translateY(0);} }
+  .feedback.red{ background:var(--red-bg); color:#7a2e26; border:1px solid #e6c3bc; }
+  .feedback.amber{ background:var(--amber-bg); color:#7a5313; border:1px solid #ecd8a8; }
+  .feedback.green{ background:var(--green-bg); color:#2a5136; border:1px solid #bcdcc4; }
+  .feedback-title{ font-weight:700; margin-bottom:4px; font-size:15px; }
+  .feedback .hint-line{ margin-top:6px; }
+  .feedback .hint-line:first-child{ margin-top:0; }
+
+  footer{ max-width:820px; margin:20px auto 0; padding:0 24px; text-align:center; color:var(--ink-soft); font-size:13px; }
+
+  @media (max-width:560px){
+    .hero{ padding:44px 18px 60px; }
+    .wrap{ padding:0 16px; }
+    .row, .table-head{ padding-left:16px; padding-right:16px; }
+    .perkataan{ font-size:16px; }
+    .choice-btn{ padding:7px 12px; font-size:12.5px; min-width:46px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <svg class="kite" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M32 4 L54 32 L32 60 L10 32 Z" stroke="#e0b04a" stroke-width="2" fill="rgba(224,176,74,0.12)"/>
+      <path d="M32 4 L32 60 M10 32 L54 32" stroke="#e0b04a" stroke-width="1.4" opacity="0.7"/>
+      <circle cx="32" cy="32" r="4" fill="#e0b04a"/>
+    </svg>
+    <div class="eyebrow">Latihan 12 · Bahasa Melayu</div>
+    <h1>Kata Nama <em>Khas & Am</em></h1>
+    <p>คลิกเลือกว่าคำแต่ละคำเป็นคำนามทั่วไป (KA) หรือคำนามเฉพาะ (KK) แล้วตรวจคำตอบเพื่อดู feedback</p>
+    <div class="hero-note">📘 คำชี้แจง: เขียน KA หากเป็นคำนามทั่วไป และเขียน KK หากเป็นคำนามเฉพาะ</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch ka"></span><b>KA</b> = Kata Nama Am (คำนามทั่วไป — ไม่เจาะจง)</div>
+    <div class="legend-item"><span class="swatch kk"></span><b>KK</b> = Kata Nama Khas (คำนามเฉพาะ — ชื่อเจาะจง เช่น ชื่อคน ประเทศ ยี่ห้อ)</div>
+  </div>
+
+  <div class="progress">
+    <div class="progress-label" id="progressLabel">0 / 10 ข้อ</div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="table-head">
+      <span>Perkataan</span>
+      <span>Jawapan</span>
+    </div>
+    <div id="rows"></div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="checkBtn">ตรวจคำตอบ</button>
+      <button class="btn btn-ghost" id="resetBtn">รีเซ็ต</button>
+      <button class="btn btn-reveal" id="hintBtn">💡 คำใบ้</button>
+    </div>
+    <div class="feedback" id="feedback"></div>
+  </div>
+</div>
+
+<footer>คลิก KA หรือ KK ให้ครบทุกคำ ก่อนกด "ตรวจคำตอบ"</footer>
+
+<script>
+const items = [
+  { word: "guru", sub: "ครู", answer: "KA" },
+  { word: "Ali", sub: "ชื่อคน", answer: "KK" },
+  { word: "sekolah", sub: "โรงเรียน", answer: "KA" },
+  { word: "Malaysia", sub: "ชื่อประเทศ", answer: "KK" },
+  { word: "buku", sub: "หนังสือ", answer: "KA" },
+  { word: "Toyota", sub: "ยี่ห้อรถ", answer: "KK" },
+  { word: "doktor", sub: "หมอ", answer: "KA" },
+  { word: "Bangkok", sub: "ชื่อเมือง", answer: "KK" },
+  { word: "kucing", sub: "แมว", answer: "KA" },
+  { word: "Universiti Malaya", sub: "ชื่อสถาบัน", answer: "KK" },
+];
+
+const hints = [
+  "Kata Nama Khas (KK) คือชื่อเฉพาะเจาะจง เช่น ชื่อคน ชื่อประเทศ ชื่อเมือง ยี่ห้อ หรือชื่อสถาบัน — ในภาษาเขียนมักขึ้นต้นด้วยตัวพิมพ์ใหญ่",
+  "Kata Nama Am (KA) คือคำเรียกทั่วไปที่ไม่เจาะจง เช่น อาชีพ สิ่งของ สัตว์ หรือสถานที่ประเภทหนึ่ง ๆ (ไม่ใช่ชื่อเฉพาะของสิ่งนั้น)",
+  "คำที่มีมากกว่าหนึ่งคำ เช่น \"Universiti Malaya\" ก็ยังนับเป็นคำนามเฉพาะหนึ่งเดียวได้ ถ้าทั้งวลีชี้เฉพาะไปยังสถาบันแห่งเดียว",
+];
+
+const state = {};
+items.forEach((it, i) => { state[i] = { selected: null }; });
+let hintLevel = 0;
+
+function render(){
+  const rowsEl = document.getElementById('rows');
+  rowsEl.innerHTML = '';
+  items.forEach((it, i) => {
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.id = 'row-' + i;
+    row.innerHTML = `
+      <div class="perkataan">${it.word}<span class="sub">${it.sub}</span></div>
+      <div class="choice-group">
+        <button class="choice-btn" data-choice="KA" data-idx="${i}">KA</button>
+        <button class="choice-btn" data-choice="KK" data-idx="${i}">KK</button>
+        <span class="mark" id="mark-${i}"></span>
+      </div>
+    `;
+    rowsEl.appendChild(row);
+  });
+
+  document.querySelectorAll('.choice-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = btn.dataset.idx;
+      const choice = btn.dataset.choice;
+      state[idx].selected = choice;
+      clearFeedback();
+      document.getElementById('row-' + idx).classList.remove('correct', 'wrong');
+      document.getElementById('mark-' + idx).textContent = '';
+      updateRowButtons(idx);
+      updateProgress();
+    });
+  });
+
+  updateProgress();
+}
+
+function updateRowButtons(idx){
+  const group = document.querySelectorAll(`.choice-btn[data-idx="${idx}"]`);
+  group.forEach(b => {
+    b.classList.remove('selected-ka', 'selected-kk');
+    if(b.dataset.choice === state[idx].selected){
+      b.classList.add(b.dataset.choice === 'KA' ? 'selected-ka' : 'selected-kk');
+    }
+  });
+}
+
+function clearFeedback(){
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback';
+  fb.innerHTML = '';
+}
+
+function updateProgress(){
+  const answered = Object.values(state).filter(s => s.selected !== null).length;
+  document.getElementById('progressLabel').textContent = `${answered} / ${items.length} ตอบแล้ว`;
+  document.getElementById('progressFill').style.width = (answered / items.length * 100) + '%';
+}
+
+document.getElementById('checkBtn').addEventListener('click', () => {
+  const unanswered = Object.values(state).filter(s => s.selected === null).length;
+  const fb = document.getElementById('feedback');
+
+  if(unanswered > 0){
+    fb.className = 'feedback show red';
+    fb.innerHTML = `
+      <div class="feedback-title">🔴 ยังไม่ครบ!</div>
+      <div>ยังเหลืออีก ${unanswered} คำที่ยังไม่ได้เลือก KA หรือ KK กรุณาตอบให้ครบก่อนตรวจคำตอบ</div>
+    `;
+    return;
+  }
+
+  let correctCount = 0;
+  items.forEach((it, i) => {
+    const row = document.getElementById('row-' + i);
+    const mark = document.getElementById('mark-' + i);
+    const isCorrect = state[i].selected === it.answer;
+    row.classList.remove('correct', 'wrong');
+    row.classList.add(isCorrect ? 'correct' : 'wrong');
+    mark.textContent = isCorrect ? '✅' : '❌';
+    if(isCorrect) correctCount++;
+  });
+
+  const ratio = correctCount / items.length;
+  fb.className = 'feedback show';
+
+  if(ratio === 1){
+    fb.classList.add('green');
+    fb.innerHTML = `
+      <div class="feedback-title">🟢 Tahniah! 🎉</div>
+      <div>คุณจำแนกคำนามทั่วไป (KA) และคำนามเฉพาะ (KK) ได้ถูกต้องครบทั้ง ${items.length} คำแล้ว!</div>
+    `;
+  } else if(ratio >= 0.5){
+    const wrongWords = items.filter((it, i) => state[i].selected !== it.answer).map(it => it.word);
+    fb.classList.add('amber');
+    fb.innerHTML = `
+      <div class="feedback-title">🟡 Hampir betul!</div>
+      <div>ถูก ${correctCount} จาก ${items.length} คำ คำที่ยังผิดอยู่ (สีแดง ❌): ${wrongWords.join(', ')} — ลองทบทวนว่าคำเหล่านี้เจาะจงเฉพาะสิ่งเดียวหรือเป็นคำเรียกทั่วไป</div>
+    `;
+  } else {
+    fb.classList.add('red');
+    fb.innerHTML = `
+      <div class="feedback-title">🔴 Belum tepat!</div>
+      <div>ถูกเพียง ${correctCount} จาก ${items.length} คำ ลองทบทวนหลักการ: <b>KK = ชื่อเฉพาะของสิ่งใดสิ่งหนึ่งโดยตรง</b> (คน/ประเทศ/เมือง/ยี่ห้อ/สถาบัน) ส่วน <b>KA = คำเรียกทั่วไปของสิ่งนั้นประเภทหนึ่ง</b></div>
+    `;
+  }
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  items.forEach((it, i) => { state[i].selected = null; });
+  hintLevel = 0;
+  clearFeedback();
+  render();
+});
+
+document.getElementById('hintBtn').addEventListener('click', () => {
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback show amber';
+
+  if(hintLevel >= hints.length){
+    fb.innerHTML = `
+      <div class="feedback-title">💡 หมดคำใบ้แล้ว</div>
+      <div>ลองพิจารณาแต่ละคำอีกครั้งตามหลักที่ให้มา แล้วกด "ตรวจคำตอบ"</div>
+    `;
+    return;
+  }
+
+  const hintsToShow = hints.slice(0, hintLevel + 1);
+  fb.innerHTML = `
+    <div class="feedback-title">💡 คำใบ้ ${hintLevel + 1}/${hints.length}</div>
+    ${hintsToShow.map((h, i) => `<div class="hint-line">${i + 1}. ${h}</div>`).join('')}
+  `;
+  hintLevel++;
+});
+
+render();
+</script>
+</body>
+</html>
